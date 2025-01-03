@@ -1,26 +1,22 @@
-function appendToDisplay(value) {
-    const display = document.getElementById("display");
-    
-    // Prevent multiple decimal points in one number
-    if (value === '.' && display.value.includes('.')) return;
+const display = document.getElementById('display');
+const themeToggle = document.getElementById('theme-toggle');
 
-    display.value += value; // Append value to the display
+function appendToDisplay(value) {
+    display.value += value;
 }
 
 function clearDisplay() {
-    const display = document.getElementById("display");
-    display.value = ""; // Clear the display
+    display.value = '';
 }
 
-function calculateResult() {
-    const display = document.getElementById("display");
-    
+function calculate() {
     try {
-        // Evaluate the expression in the display
-        const result = eval(display.value);
-        display.value = result; // Show result in the display
+        display.value = eval(display.value.replace('sqrt', 'Math.sqrt'));
     } catch (error) {
-        display.value = "Error"; // Show error if evaluation fails
-        setTimeout(clearDisplay, 1500); // Clear after a short delay
+        display.value = 'Error';
     }
 }
+
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+});
